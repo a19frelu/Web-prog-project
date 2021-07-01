@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style media="screen">
+
+    /* #navbar{
+      background-color: #8E96BD;
+      box-shadow: 0px 2px 10px 2px rgba(0,0,0,0.5);
+      height: 5%;
+      z-index: 2;
+      flex-wrap: nowrap;
+      overflow: hidden;
+    }
+    #register1{
+      display: none;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      z-index: 10;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
+    .RegisterPage{
+      background-color: #fefefe;
+      margin: 5% auto 15% auto;
+      border: 40px solid #8E96BD;
+      width: 30%;
+      height: 30%;
+    }
+   #registerpopup{
+      width: 100%;
+      height: 0;
+      background-color: #FFB732;
+      position: fixed;
+      text-align: center;
+      line-height: 50px;
+      display: none;
+    } */
+
+    .btn {
+      background-color:#8E96BD;
+      color:#fff;
+      font-size: 20px;
+      box-shadow: 0px 2px 10px 2px rgba(0,0,0,0.5);
+      height: 100%;
+      margin-left: 3%;
+      width: 16%;
+      text-align: center;
+      display: inline-block;
+      border:0;
+      padding: 8px 5px;
+      cursor: default;
+      font-weight: 400;
+    }
+    #login1{
+      display: none;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      z-index: 10;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
+    .LoginPage{
+      background-color: #fefefe;
+      margin: 5% auto 15% auto;
+      border: 40px solid #8E96BD;
+      width: 30%;
+      height: 30%;
+    }
+    #loginpopup{
+      width: 100%;
+      height: 0;
+      background-color: #a2ff7a;
+      position: fixed;
+      text-align: center;
+      line-height: 50px;
+      display: none;
+    }
+    #logoutpopup{
+      width: 100%;
+      height: 0;
+      background-color: #e66565;
+      position: fixed;
+      text-align: center;
+      line-height: 50px;
+      display: none;
+    }
+    </style>
+    <script type="text/javascript">
+
+      function showLogin(){
+
+        var login = document.getElementById("login1");
+        login.style.display = "block";
+
+        window.onclick = function(event) {
+          if (event.target == login ) {
+            login.style.display = "none";
+          }
+        }
+      }
+      function CheckLogin()
+      {
+        var Mail = document.getElementById("emailinput");
+        var login = document.getElementById("login1");
+
+        var correctCounter = 0;
+
+        if (Mail.value.indexOf('@')==-1) {
+          Mail.style.backgroundColor = "#e66565";
+          alert("Please type in a correct Email")
+        }else {
+          Mail.style.backgroundColor = "#a2ff7a";
+          correctCounter++;
+        }
+
+
+        if (correctCounter == 1) {
+          login.style.display = "none";
+          $('#loginbutton').hide();
+          $('#logoutbutton').toggle();
+
+          $(document).ready(function () {
+            $('#loginpopup').toggle();
+            $( "#loginpopup" ).animate({
+              height: "50px"
+            }, 1000, function() {
+              $("#loginpopup").animate({
+                height: "0px"
+              },1000, function(){
+              $('#loginpopup').hide();
+              });
+            });
+            console.log("Animeringen har visats");
+          });
+        }
+      }
+      function clicklogout(){
+          $('#logoutbutton').hide();
+          $('#loginbutton').toggle();
+
+          $(document).ready(function () {
+            $('#logoutpopup').toggle();
+            $( "#logoutpopup" ).animate({
+              height: "50px"
+            }, 1000, function() {
+              $("#logoutpopup").animate({
+                height: "0px"
+              },1000, function(){
+              $('#logoutpopup').hide();
+              });
+            });
+          });
+          console.log("Animeringen har visats");
+      }
+    </script>
+  </head>
+  <body>
+    <div id="loginpopup" class="#">
+      Du är INLOGGAD
+    </div>
+    <div id="logoutpopup" class="#">
+      Du är UTLOGGAD
+    </div>
+    <div id="login1">
+      <div class="LoginPage">
+        Email<input id="emailinput" type="text" value="" /><br>
+        <button onclick="CheckLogin()" >Click here</button>
+      </div>
+    </div>
+    <button id="loginbutton" class="btn" type="button" onclick="showLogin();">Login</button>
+    <button id="logoutbutton" class="btn" type="button" style="display: none;" onclick="clicklogout()">LogOut</button>
+
+  </body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Space Base</title>
+
+    <link rel="stylesheet" href="SP-stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      function showPage(p){
+        // Step 1 - Hide all pages
+        pageArr=document.getElementsByClassName("page");
+        for(let i=0;i<pageArr.length;i++){
+          let page=pageArr[i];
+          page.style.display="none";
+        }
+        // Step 2 - Show the selected page
+        document.getElementById("page"+p).style.display="block";
+
+        // Step 3 - Make buttons inactive
+        btnArr = document.getElementsByClassName("btn");
+        for(let i=0;i<btnArr.length;i++){
+          let btn=btnArr[i];
+          btn.classList.remove("active");
+        }
+        // Step 4 - Make page button active
+        let navBtn = document.getElementById("nav"+p);
+        if(navBtn) {
+          navBtn.classList.add("active");
+        }
+        // TA BORT INNAN INLÄMNING
+        // console.log("Sida ett visas.")
+      }
+
+
+      // Javascript som validerar om det finns ett "@" i mailfältet på inloggnings-och registreringssidan.
+      function validateEmail(el){
+        // TA BORT INNAN INLÄMNING
+        console.log(el.value);
+        if(el.value.indexOf("@") !=  -1 || 0){
+          var popup = document.getElementById("myPopup");
+          popup.classList.toggle("show");
+        }
+        else {
+          document.getElementById("myPopup");
+          popup.classList.toggle("hide");
+        }
+      }
+
+      //Jquery som ser till att den aktiva knappen har en annan CSS-utformning än knapparna som inte är aktiva genom dess olika klasser.
+      $(document).ready(function(){
+        $('.btn').click(function(){
+          $('.btn').removeClass('active').addClass('inactive');
+           $(this).removeClass('inactive').addClass('active');
+         },function(){
+            // $("#nav9").hide();
+         });
+      })
+
+
+      //-------------------------------------------------- Funktionerna för loginsidan. ---------------------------------------
+
+      //------------------------------ Loginrutan visas------
+      function showLogin(){
+
+        var login = document.getElementById("logindiv");
+        login.style.display = "block";
+        document.getElementById("formdiv").style.display = "none";
+
+        window.onclick = function(event) {
+          if (event.target == login ) {
+            login.style.display = "none";
+          }
+          // Ta bort innan inlämning.
+        console.log("Knappen ''logga in'' är klickad");
+        }
+        
+      }
+
+      //-------------------------------------- Kontrollerar att "@" finns med i inloggningsfältet ----------------------
+      function CheckLogin()
+      {
+        var Mail = document.getElementById("emailinput_login");
+        var login = document.getElementById("logindiv");
+
+        var correctCounter = 0;
+
+        if (Mail.value.indexOf ('@') == -1) {
+          Mail.style.backgroundColor = "#e66565";
+          alert("Please type correct Email")
+        }else {
+          Mail.style.backgroundColor = "#a2ff7a";
+          correctCounter++;
+        }
+
+        //------------ Gömmer loginfönstret och Togglar "Logga in" knappen om "correctCounter" är =1 samt visar inloggningsstatus. ------
+        if (correctCounter == 1) {
+          login.style.display = "none";
+          $('#loginbutton').hide();
+          $('#logoutbutton').toggle();
+
+          $(document).ready(function () {
+            $('#loginpopup').toggle();
+            $( "#loginpopup" ).animate({
+              height: "50px"
+            }, 1000, function() {
+              $("#loginpopup").animate({
+                height: "0px"
+              },1000, function(){
+              $('#loginpopup').hide();
+              });
+            });
+          });
+        }
+        console.log("logOnButton klickad och bör togglas")
+      }
+
+      //------------------------------- Togglar "Logga ut" knappen och visar utloggningsstatusen samt döljer den igen. ---------------
+      function clicklogout(){
+          $('#logoutbutton').hide();
+          $('#loginbutton').toggle();
+
+          $(document).ready(function () {
+            $('#logoutpopup').toggle();
+            $( "#logoutpopup" ).animate({
+              height: "50px"
+            }, 3000, function() {
+              $("#logoutpopup").animate({
+                height: "0px"
+              },3000, function(){
+              $('#logoutpopup').hide();
+              });
+            });
+          });
+          console.log("Loginknappen klickadnappen")
+      }
+
+
+      // ------------------------------------------- Funktionerna för registreringssidan. -------------------------------------
+      function showRegister(){
+
+        var register = document.getElementById("formdiv");
+        register.style.display = "block";
+        document.getElementById("logindiv").style.display = "none";
+
+        window.onclick = function(event) {
+          if (event.target == register ) {
+            register.style.display = "none";
+          }
+        }
+        console.log("Knappen ''registrera'' är klickad");
+      }
+
+      //------------------------------------------ Kontrollerar att "@" finns med i registreringssfältet ---------------------------
+      function CheckRegister()
+      {
+        var Mail = document.getElementById("emailinput_register");
+        var register = document.getElementById("formdiv");
+
+        var correctCounter = 0;
+
+        if (Mail.value.indexOf('@')==-1) {
+          Mail.style.backgroundColor = "#e66565";
+          alert("Please type in a correct Email")
+        }else {
+          Mail.style.backgroundColor = "#a2ff7a";
+          correctCounter++;
+        }
+      }
+
+
+      //   if (correctCounter == 1) {
+      //     login.style.display = "none";
+      //     $('#loginbutton').hide();
+      //     $('#logoutbutton').toggle();
+
+      //     $(document).ready(function () {
+      //       $('#loginpopup').toggle();
+      //       $( "#loginpopup" ).animate({
+      //         height: "50px"
+      //       }, 3000, function() {
+      //         $("#loginpopup").animate({
+      //           height: "0px"
+      //         },3000, function(){
+      //         $('#loginpopup').hide();
+      //         });
+      //       });
+      //     });
+      //   }
+      // }
+      // function clicklogout(){
+      //     $('#logoutbutton').hide();
+      //     $('#loginbutton').toggle();
+
+      //     $(document).ready(function () {
+      //       $('#logoutpopup').toggle();
+      //       $( "#logoutpopup" ).animate({
+      //         height: "50px"
+      //       }, 1000, function() {
+      //         $("#logoutpopup").animate({
+      //           height: "0px"
+      //         },1000, function(){
+      //         $('#logoutpopup').hide();
+      //         });
+      //       });
+      //     });
+      //     console.log("Animeringen har visats");
+      
+
+
+    </script>
+  </head>
+
+  <body onload="showPage(1)">
+
+    <div id="myPopup"class="#">
+      Vad i allsindar?
+    </div>
+
+    <div id="regpopup" class="#">
+      Du har nu registrerat ett konto!
+    </div>
+
+    <div id="loginpopup" class="#">
+      Du har loggats in!
+    </div>
+
+    <div id="logoutpopup" class="#">
+      Du har loggats ut!
+    </div>
+
+   <!--################-------------------------------- Navigeringsmenyn ------------------------------------################-->
+   <div class="navbar">
+      <a id="nav1" class="btn active" type="button" onclick="showPage(1);">(1)Resor</a>
+      <a id="nav2" class="btn" type="button" onclick="showPage(2);">(2)Boka resa</a>
+      <a id="nav3" class="btn" type="button" onclick="showPage(3);">(3)Priser</a>
+      <a id="nav4" class="btn" type="button" onclick="showPage(4);">(4)Destinationer</a>
+
+      <a id="loginbutton" class="btn" type="button" onclick="showLogin();">(9)Logga in</a>
+      <a id="logoutbutton" class="btn" type="button" style="display: none;" onclick="clicklogout();">(10)Logga ut</a>
+      <a id="nav11" class="btn" type="button" onclick="showRegister();" >(11)Registrera</a>
+   </div>
+   <div id="navbar-2" class="navbar">
+     <a href="#" id="nav6" class="btn" type="button" onclick="showPage(6);">(6)Vår organisation</a>
+     <a href="#" id="nav7" class="btn" type="button" onclick="showPage(7);">(7)Vision</a>
+     <a href="#" id="nav8" class="btn" type="button" onclick="showPage(8);">(8)Framtid</a>
+   </div>
+
+   <!--################-------------------------------- Sidinnehåll med bakgrund ------------------------------------################-->
+  
+   <div class="container">
+
+     <div id="page1" class="page">
+       <p>Simpel text.</p>
+     </div>
+
+     <div id="page2" class="page">
+       <p>Simpel text 2.</p>
+     </div>
+
+     <div id="page3" class="page">
+       <p>Simpel text 3.</p>
+     </div>
+
+      <div id="page4" class="page">
+        <p>Simpel text 4.</p>
+      </div>
+
+      <div id="page5" class="page">
+        <p>Simpel text 5.</p>
+      </div>
+
+      <div id="page6" class="page">
+        <p>Simpel text 6.</p>
+      </div>
+
+      <div id="page7" class="page">
+        <p>Simpel text 7.</p>
+      </div>
+
+      <div id="page8" class="page">
+        <p>Simpel text 8.</p>
+      </div>
+
+   </div>
+
+   <!--################-------------------------------- Registreringsrutan ------------------------------------################-->
+
+   <div id="formdiv" class="modal">
+
+     <form id="regForm" class="modal-content animate" action="SpaceBase.html" method="post">
+
+       <div class="headercontainer">
+         <span onclick="document.getElementById('formdiv').style.display='none'" class="close" title="Close Modal">&times;</span>
+         <h1>Registrera nytt konto</h1>
+       </div>
+
+       <div id="formcontainer" class="logincontainer">
+
+         <div class="loginform">
+           <label for="uname"><b>Namn:</b></label><br>
+           <input class="loginsquare" type="text" placeholder="Förnamn" name="uname" autocomplete="off" required><br><br>
+           <input class="loginsquare" type="text" placeholder="Efternamn" name="uname" autocomplete="off" required><br><br>
+         </div>
+
+         <div class="loginform">
+           <label for="uname"><b>Email:</b></label><br>
+           <input id="emailinput_register" class="loginsquare" onkeyup="validateEmail(this)" type="email" placeholder="Enter Username (email)" name="uname" autocomplete="off" required>
+         </div>
+
+         <br>
+
+         <div class="loginform">
+           <button onclick="CheckRegister()" type="submit">Registrera</button>
+         </div>
+
+       </div>
+
+       <div id="cancelForm" class="cancelcontainer">
+         <button type="button" onclick="document.getElementById('logindiv').style.display='none'" class="cancelbtn">Cancel</button>
+       </div>
+
+     </form>
+
+   </div>
+
+
+<!--################-------------------------------- Inloggningsrutan ------------------------------------################-->
+    <div id="logindiv" class="modal">
+
+      <form class="modal-content animate" action="SpaceBase.html" method="post">
+
+        <div class="headercontainer">
+          <span onclick="document.getElementById('logindiv').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <h1>Logga in</h1>
+        </div>
+
+        <div class="logincontainer">
+
+          <div class="loginform">
+            <label for="uname"><b>Username:</b></label><br>
+            <input id="emailinput_login" class="loginsquare" onkeyup="validateEmail(this)" type="email" placeholder="Enter Username (Your email)" name="uname" autocomplete="on" size="25" required>
+          </div>
+
+          <br>
+
+          <div class="loginform">
+            <button id="logOnButton" onclick="CheckLogin()" type="submit">Login</button>
+          </div>
+
+          <label>
+            <input type="checkbox" name="remember"> Remember me
+          </label>
+        </div>
+
+        <div class="cancelcontainer">
+          <button type="button" onclick="document.getElementById('logindiv').style.display='none'" class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+
+      </form>
+    </div>
+
+  </body>
+</html>
